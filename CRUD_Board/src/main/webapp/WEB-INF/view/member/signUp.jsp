@@ -55,8 +55,12 @@ function execPostCode() {
            console.log(fullRoadAddr);
            
            
-           $("[name=member_address.member_postcode]").val(data.zonecode);
+         /*   $("[name=member_address.member_postcode]").val(data.zonecode);
            $("[name=member_address.member_address]").val(fullRoadAddr);
+           */
+           
+           document.getElementById('member_postcode').value = data.zonecode;
+           document.getElementById('member_address').value = fullRoadAddr;
            
            /* document.getElementById('signUpUserPostNo').value = data.zonecode; //5자리 새우편번호 사용
            document.getElementById('signUpUserCompanyAddress').value = fullRoadAddr;
@@ -333,11 +337,11 @@ var idck = 0;
 	
 	<div class="form-group"> 
 	<label>주소</label> <br />                 
-<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="member_address.member_postcode" id="member_address.member_postcode" type="text" readonly="readonly" >
+<input class="form-control" style="width: 40%; display: inline;" placeholder="우편번호" name="member_address.member_postcode" id="member_postcode" type="text" readonly="readonly" >
     <button type="button" class="btn btn-default" onclick="execPostCode();"><i class="fa fa-search"></i> 우편번호 찾기</button>                               
 </div>
 <div class="form-group">
-    <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="member_address.member_address" id="member_address.member_address" type="text" readonly="readonly" />
+    <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="member_address.member_address" id="member_address" type="text" readonly="readonly" />
 </div>
 <div class="form-group">
     <input class="form-control" placeholder="상세주소" name="member_address.member_detail" id="member_address.member_detail" type="text"  />

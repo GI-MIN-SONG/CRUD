@@ -12,7 +12,15 @@
 	<!-- 회원 가입  -->
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member(
-			member_id,member_pwd,member_name,member_email,member_address_id,member_type,member_date
+			member_id,
+			member_pwd,
+			member_name,
+			member_email,
+			member_address_id,
+			member_gender,
+			member_type,
+			member_photo,
+			member_date
 		)VALUES(
 			#{member_id},
 			#{member_pwd},
@@ -21,6 +29,7 @@
 			#{member_address.address_id},
 			#{member_gender},
 			0,
+			null,
 			now()
 		)
 	
