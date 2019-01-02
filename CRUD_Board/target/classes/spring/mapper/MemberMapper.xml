@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.tje.model.MemberMapper">
+
+
+
+	
+	<!-- 회원 가입  -->
+	<insert id="insertMember" parameterType="member">
+		INSERT INTO member(
+			member_id,member_pwd,member_name,member_email,member_address_id,member_type,member_date
+		)VALUES(
+			#{member_id},
+			#{member_pwd},
+			#{member_name},
+			#{member_email},
+			#{member_address.address_id},
+			#{member_gender},
+			0,
+			now()
+		)
+	
+	</insert>
+	
+	<!-- 주소 값 -->
+	<insert id="insertAddress" useGeneratedKeys="true" keyProperty="address_id" parameterType="member_address">
+		insert into member_address
+		(member_postcode,
+		member_address,
+		member_detail)
+		values
+		(
+		#{member_postcode},
+		#{member_address},
+		#{member_detail}
+		)
+	
+	</insert>	
+	
+	<!-- 아이디 중복 체크  -->
+	<select id="idcheck" parameterType="String" resultType="Integer">
+		select count(*) from member
+		where member_id = #{member_id}
+	</select>
+	
+	<select id="oneMember" parameterType="member" resultType="member">
+		select * from member
+		where member_id = #{member_id}
+	
+	</select>
+
+
+</mapper>
