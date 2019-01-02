@@ -23,7 +23,7 @@ public class BoardController {
 	// 의존 관계 
 	@Autowired
 	private BoardService service;
-	//1234
+	
 	//글 쓰기 폼 불러오기
 	@RequestMapping(value="/write.do",method=RequestMethod.GET)
 	public String write()throws Exception{
