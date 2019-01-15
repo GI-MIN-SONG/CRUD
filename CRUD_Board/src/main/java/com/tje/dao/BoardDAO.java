@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.tje.model.Board;
+import com.tje.model.Criteria;
 
 @Repository
 public class BoardDAO  {
@@ -23,21 +24,32 @@ public class BoardDAO  {
 		sqlSession.insert(namespace+".insertBoard", board);
 		
 	}
+	/*
+	 * // 게시판 보기 public List<Board> listAll(int start, int end, String searchOption,
+	 * String keyword) throws Exception {
+	 * 
+	 * // 검색옵션, 키워드 맵에 저장
+	 * 
+	 * Map<String, Object> map = new HashMap<String, Object>();
+	 * map.put("searchOption", searchOption); map.put("keyword", keyword);
+	 * 
+	 * //BETWEEN #{start}, #{end}에 입력될 값을 맵에 저장 map.put("start", start);
+	 * map.put("end", end);
+	 * 
+	 * return sqlSession.selectList(namespace + ".listAll", map); }
+	 */
+	
+
 	// 게시판 보기
-	public List<Board> listAll(int start, int end, String searchOption, String keyword) throws Exception {
+	public List<Board> listAll() throws Exception {
 		
 		// 검색옵션, 키워드 맵에 저장
 		
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("searchOption", searchOption);
-		map.put("keyword", keyword);
 		
-		//BETWEEN #{start}, #{end}에 입력될 값을 맵에 저장
-		map.put("start", start);
-		map.put("end", end);
-		
-		return sqlSession.selectList(namespace + ".listAll", map);
+		return sqlSession.selectList(namespace + ".listAll");
 	}
+	
+	
 	// 게시판 상세
 	public Board read(int b_no) throws Exception {
 		return sqlSession.selectOne(namespace+".detailBoard",b_no);
@@ -56,6 +68,19 @@ public class BoardDAO  {
 	// 조회수 증가
 	public void increaseViewcnt(int b_no) throws Exception{
 		sqlSession.update(namespace + ".increaseViewcnt",b_no);
+	}
+	
+
+
+	//페이징 
+	
+	public int countArticles(Criteria criteria) throws Exception {
+    return sqlSession.selectOne(namespace + ".countArticles", criteria);
+}
+
+
+	public List<Board> listCriteria(Criteria criteria) throws Exception {
+	    return sqlSession.selectList(namespace + ".listCriteria", criteria);
 	}
 	
 

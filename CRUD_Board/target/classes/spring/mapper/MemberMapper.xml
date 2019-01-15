@@ -6,13 +6,19 @@
     
 <mapper namespace="com.tje.model.MemberMapper">
 
-
-
 	
 	<!-- 회원 가입  -->
 	<insert id="insertMember" parameterType="member">
 		INSERT INTO member(
-			member_id,member_pwd,member_name,member_email,member_address_id,member_type,member_date
+			member_id,
+			member_pwd,
+			member_name,
+			member_email,
+			member_address_id,
+			member_gender,
+			member_type,
+			member_photo,
+			member_date
 		)VALUES(
 			#{member_id},
 			#{member_pwd},
@@ -21,6 +27,7 @@
 			#{member_address.address_id},
 			#{member_gender},
 			0,
+			null,
 			now()
 		)
 	
@@ -52,6 +59,33 @@
 		where member_id = #{member_id}
 	
 	</select>
+	
+	
+	<!-- Member 와 Member_address 클래스를 매핑 시켜주기 위해 설정  -->
+	
+	<resultMap type="member" id="Member">
+		<result property="member_id" column="member_id"/>
+		<result property="member_pwd" column="member_pwd"/>
+		<result property="member_name" column="member_name"/>
+		<result property="member_address_id" column="member_address_id"/>
+		<result property="member_email" column="member_email"/>
+		<result property="member_gender" column="member_gender"/>
+		<result property="member_photo" column="member_photo"/>
+		<result property="member_date" column="member_date"/>
+		<association property="member_address" javaType="Member_address">
+    		<result property="member_postcode" column="member_postcode" />
+			<result property="member_address" column="member_address" />
+			<result property="member_detail" column="member_detail" />
+    	</association>		
+	</resultMap>
+	
+	<!-- 조인을 통해 주소값 추출  -->
+	<select id="login" parameterType="member" resultMap="Member">
+		select * from
+		member inner join member_address
+		on member.member_address_id = member_address.member_address_id
+		where member_id = #{member_id} and member_pwd = #{member_pwd}
+	</select> 
 
 
 </mapper>

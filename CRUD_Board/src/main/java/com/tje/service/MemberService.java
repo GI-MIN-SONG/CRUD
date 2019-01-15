@@ -1,5 +1,7 @@
 package com.tje.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,5 +41,16 @@ public class MemberService {
 		
 		return this.dao.selectOne(member);
 	}
+
+
+
+	public Member login(Member member) {
+		
+		
+		return this.dao.login(member);
+		
+	}
+
+
 
 }

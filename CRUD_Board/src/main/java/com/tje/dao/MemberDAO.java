@@ -47,4 +47,10 @@ public class MemberDAO {
 			return session.selectOne(strNameSpace + ".idcheck", member_id);
 		}
 
+
+		public Member login(Member member) {
+			
+			return session.selectOne(strNameSpace+ ".login",member);
+		}
+
 }

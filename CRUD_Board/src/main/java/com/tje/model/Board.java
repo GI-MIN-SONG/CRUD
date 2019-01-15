@@ -7,13 +7,26 @@ public class Board {
 	
 	int b_no;
 	String b_title;
-	String b_detail;
+	String b_content;
 	String b_writer;
 	Date b_date;
 	int b_count;
+	int code;
 	
 	
 	
+	public int getCode() {
+		return code;
+	}
+
+
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+
+
 	public Board() {
 	}
 
@@ -42,16 +55,6 @@ public class Board {
 	}
 
 
-
-	public String getB_detail() {
-		return b_detail;
-	}
-
-
-
-	public void setB_detail(String b_detail) {
-		this.b_detail = b_detail;
-	}
 
 
 
@@ -90,10 +93,25 @@ public class Board {
 	}
 	
 	
+	
+	
+	
+	public String getB_content() {
+		return b_content;
+	}
+
+
+
+	public void setB_content(String b_content) {
+		this.b_content = b_content;
+	}
+
+
+
 	public String toString() {
 		return "Board [b_no=" + b_no
 				+ ", title=" + b_title 
-				+ ", detail =" + b_detail 
+				+ ", content =" + b_content 
 				+ ", writer =" + b_writer
 				+ ", date =" + b_date
 				+ ", count =" + b_count

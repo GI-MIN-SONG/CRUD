@@ -4,10 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,11 +32,64 @@ public class MemberController {
 	private MemberService service;
 	
 	// 회원 가입 GET
-	@RequestMapping(value="/signup.do", method=RequestMethod.GET)
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signupGET() {
 		return "/member/signUp";
 		
 	}
+	
+	// 회원 가입 GET
+		@RequestMapping(value="/sign", method=RequestMethod.GET)
+		public String signupGET2() {
+			
+			return "/member/sign";
+		}
+	
+	// 로그인 폼 GET 방식
+	@RequestMapping(value="/login", method=RequestMethod.GET)
+	public String loginForm() {
+		return "/member/login";
+	}
+	
+	// 로그인 처리 POST 방식
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String loginResult(HttpSession session, Member member) {
+		
+		
+		
+		
+		member = service.login(member);
+		
+		if(member == null) {
+			System.out.println("로그인 실패");
+			return "/member/loginResult";
+		}else {
+			
+			session.setAttribute("loginmember", member);
+			System.out.println("로그인 성공 세션 정보 :" + session.getId());
+			return "/member/loginResult";
+		}
+		
+
+	}
+	
+	// 로그아웃
+	@RequestMapping(value="logout", method=RequestMethod.GET)
+	public String Logout(HttpSession session,HttpServletResponse res,HttpServletRequest req)throws Exception {
+		session = req.getSession(false);
+		
+		if(session != null) {
+			session.removeAttribute("loginmember");
+		}
+		
+		
+		res.sendRedirect(req.getContextPath()+"/");
+		
+		return null;
+		
+	}
+	
+	
 	
 	
 	
@@ -86,7 +143,7 @@ public class MemberController {
 //	}
 //	
 	
-	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
 	public String signupPOST(Member member) {
 		
 		System.out.println("회원가입 요청");

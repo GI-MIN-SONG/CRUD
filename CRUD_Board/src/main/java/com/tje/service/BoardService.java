@@ -1,6 +1,7 @@
 package com.tje.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.tje.dao.BoardDAO;
 import com.tje.model.Board;
+import com.tje.model.Criteria;
 
 @Service
 public class BoardService   {
@@ -21,7 +23,7 @@ public class BoardService   {
 		//dao.create(board);
 		
 		String title = board.getB_title();
-		String detail = board.getB_detail();
+		String content = board.getB_content();
 		String writer = board.getB_writer();
 		// * 태그문자 처리 (< ==> &lt; > ==> &gt;)
 		// replace(A, B ) A를 B로 변경
@@ -35,17 +37,24 @@ public class BoardService   {
 		writer = writer.replace("  ", "&nbsp;&nbsp");
 		
 		// * 줄바꿈 문자처리
-		detail = detail.replace("\n", "<br>");
+		content = content.replace("\n", "<br>");
 		board.setB_title(title);
-		board.setB_detail(detail);
+		board.setB_content(content);
 		board.setB_writer(writer);
 		dao.create(board);
 	}
 	
+	/*
+	 * // 게시글 전체 보기 public List<Board> listAll(int start, int end, String
+	 * searchOption, String keyword) throws Exception {
+	 * 
+	 * return dao.listAll(start,end,searchOption,keyword); }
+	 */
+	
 	// 게시글 전체 보기
-	public List<Board> listAll(int start, int end, String searchOption, String keyword) throws Exception {
+	public List<Board> listAll() throws Exception {
 		
-		return dao.listAll(start,end,searchOption,keyword);
+		return dao.listAll();
 	}
 	
 	// 게시글 상세보기
@@ -79,6 +88,21 @@ public class BoardService   {
 			dao.increaseViewcnt(b_no);
 			session.setAttribute("update_time_"+b_no,current_time);
 		}
+	}
+
+	
+
+	public List<Board> listCriteria(Criteria criteria) throws Exception {
+	    return dao.listCriteria(criteria);
+	}
+
+	public int countArticles(Criteria criteria) throws Exception {
+	    return dao.countArticles(criteria);
+	}
+
+	public Board selectBoardByCode(Board boardVO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

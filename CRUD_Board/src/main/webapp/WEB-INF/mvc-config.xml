@@ -20,6 +20,18 @@
 	        <property name="suffix" value=".jsp"/>
 	</bean>
 	
+<!-- 	 
+	 <mvc:interceptors>
+	 	<mvc:interceptor>
+	 		
+	 		<mvc:mapping path="/board/list" /> 
+	 		
+	 		
+	 		
+	 	<bean class="com.tje.util.LoginCheckInterceptor" />
+	 	</mvc:interceptor>
+	 </mvc:interceptors>
+	 -->
 	<mvc:resources mapping="/resources/**" location="WEB-INF/resources/" />
 	
 	<context:component-scan base-package="com.tje.controller" />

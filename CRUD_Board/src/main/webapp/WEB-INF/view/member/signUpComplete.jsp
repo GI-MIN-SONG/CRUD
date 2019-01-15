@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<h2>${member.userid } 님 가입 성공.</h2>
+<h2>${loginmember.member_name } 님 가입 성공.</h2>
 
 </body>
 </html>

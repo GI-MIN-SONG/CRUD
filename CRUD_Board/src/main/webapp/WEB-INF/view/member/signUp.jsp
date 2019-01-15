@@ -9,10 +9,12 @@
 	아래의 태그 라이브러리를 추가해야 한다. -->
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 
+
 <!DOCTYPE html>
 <html>
 <head>
 
+<meta name="viewport" content="width=device-width" , inital-scale=1.0">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -276,11 +278,14 @@ var idck = 0;
 <title>회원 가입 페이지</title>
 </head>
 <body>
+<jsp:include page="../include/header.jsp"/>
 <div class="row"> 
 <div class="col-md-6">
+
 <h1>회원가입</h1>
+
  <%-- <form action="${pageContext.request.contextPath}/member/signup.do" method="post" name="join" onsubmit="return validate();"> --%>
-<form action="${pageContext.request.contextPath}/member/signup.do" method="post" >
+<form action="${pageContext.request.contextPath}/member/signup" method="post" >
 	
 	
 	<div class="form-group" id="divInputId">
@@ -288,29 +293,13 @@ var idck = 0;
     	<input class="form-control" style="width: 40%; display: inline;" placeholder="아이디를 입력해주세요." name="member_id" id="member_id" type="text"  />
 		<button type="button" class="btn btn-default" id="btn_idcheck"><i class="fa fa-search"></i> 중복확인</button>
 		<span id="idCheckMsg" style="color:red; font-size:small;"></span>
-	  <spring:hasBindErrors name="member">
-                  <c:if test="${errors.hasFieldErrors('member_id') }">                                     
-                           <spring:message
-                                   code="${errors.getFieldError('member_id').codes[0]}"
-                                   text="${errors.getFieldError('member_id' ).defaultMessage  }"
-                           />  
-                           <spring:message
-                                   code="${errors.getFieldError('member_id').codes[1]}"
-                                   text="${errors.getFieldError('member_id' ).defaultMessage  }"
-                           />        
-                  </c:if>
-         </spring:hasBindErrors>
 	</div>
 	
 	
 	<div class="form-group">
 	<label>비밀번호</label> <br />
     <input class="form-control" style="top: 5px;" placeholder="비밀번호를 입력해주세요." name="member_pwd" id="member_pwd" type="password"  />
-		<spring:hasBindErrors name="member">
-			<c:if test="${errors.hasFieldErrors('member_pwd') }">
-				<strong>${errors.getFieldError('member_pwd').defaultMessage }</strong>
-			</c:if>
-		</spring:hasBindErrors>
+		
 </div>
 
 	<div class="form-group">
@@ -321,7 +310,7 @@ var idck = 0;
 	
 		<div class="form-group">
 	<label>이름</label> <br />
-    <input class="form-control" style="top: 5px;" placeholder="이름" name="member_name" id=""member_name"" type="text"  />
+    <input class="form-control" style="top: 5px;" placeholder="이름" name="member_name" id="member_name" type="text"  />
 </div>
 
 	<div class="form-group">

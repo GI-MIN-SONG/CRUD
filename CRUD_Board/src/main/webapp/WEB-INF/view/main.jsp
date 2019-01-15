@@ -3,16 +3,26 @@
 <!DOCTYPE html>
 <html>
 <head>
- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  
+  <%-- 부트스트랩 이용하기 --%>
+<link rel="stylesheet" type = "text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
+<script type = "text.javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"> </script>
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/custom.css">
+
+<!-- html 메인화면 적용시킨 것  -->
+<%-- 부트스트랩 이용하기 --%>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
 <meta charset="UTF-8">
 <title>메인 페이지</title>
+	
 </head>
 <body>
+<%@ include file="include/header.jsp" %>
 
 
-
+<%-- 
 <div class="container">
 <h3>회원</h3>
 <a href="${pageContext.request.contextPath}/member/signup.do" class="btn btn-primary">회원가입</a>
@@ -22,6 +32,6 @@
 <h3>게시글 </h3>
 <a href="${pageContext.request.contextPath}/board/list.do" class="btn btn-primary">게시글 목록보기</a>
 </div>
-
+ --%>
 </body>
 </html>

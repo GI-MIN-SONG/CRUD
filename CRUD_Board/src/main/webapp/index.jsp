@@ -9,6 +9,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>Welcome</title>
+	
 	</head> 
 	<body>
 		<c:url value="/board/list.do" var="boardList" />
