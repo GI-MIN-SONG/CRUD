@@ -28,7 +28,7 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
-	//글 쓰기 폼 불러오기
+	//글 쓰기 폼 GET 방식 불러오기
 	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String write()throws Exception{
 		System.out.println("write 입니다. GET방식");
@@ -36,13 +36,13 @@ public class BoardController {
 		return "/board/write";
 	}
 	
-	// 글 쓰기
+	// 글 쓰기 POST 방식 글 쓰기
 	@RequestMapping(value="/write",method=RequestMethod.POST)
 	public String insert(@ModelAttribute Board board)throws Exception{
 		
 		service.create(board);
 		System.out.println("글쓰기 완료");
-		return "redirect:/board/list";
+		return "redirect:/board/listPaging";
 		
 	}
 	
@@ -50,16 +50,19 @@ public class BoardController {
 	
 	@RequestMapping(value = "/listPaging", method = RequestMethod.GET)
 	public String listPaging(Model model, Criteria criteria) throws Exception {
+		
+		
+		
 
 	    PageMaker pageMaker = new PageMaker();
 	    pageMaker.setCriteria(criteria);
 	    // 수정
 	    pageMaker.setTotalCount(service.countArticles(criteria));
 
-	    model.addAttribute("articles", service.listCriteria(criteria));
+	    model.addAttribute("list", service.listCriteria(criteria));
 	    model.addAttribute("pageMaker", pageMaker);
 
-	    return "/article/list_paging";
+	    return "/board/list_paging";
 	}
 	
 	
@@ -104,7 +107,7 @@ public class BoardController {
 	
 		// @RequestParam(defaultValue="") ==> 기본값 할당 : 현재페이지를 1로 초기화
 		@RequestMapping(value="list",method=RequestMethod.GET)
-		public ModelAndView lis(ModelAndView model)throws Exception{
+		public ModelAndView list(ModelAndView model)throws Exception{
 			System.out.println("전체목록 페이지");
 			
 			// 레코드의 갯수 계산
@@ -119,7 +122,7 @@ public class BoardController {
 			return model;
 			
 		}
-	
+	/*
 	//상세 게시글 ,조회수 증가 처리
 	@RequestMapping(value="view",method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int b_no, HttpSession session)throws Exception{
@@ -131,20 +134,20 @@ public class BoardController {
 		System.out.println("상세 게시글 가저오기 ");
 		
 		return mav;
-	}
+	}*/
 	
 	
-	@RequestMapping(value="/board/viewContent.do")
+	@RequestMapping(value="/view")
     public String viewForm(@ModelAttribute("boardVO") Board boardVO, Model model, HttpServletRequest request) throws Exception{
         
-        int code = Integer.parseInt(request.getParameter("code"));
-        boardVO.setCode(code);
+        int code = Integer.parseInt(request.getParameter("b_no"));
+        boardVO.setB_no(code);
         
         Board resultVO = service.selectBoardByCode(boardVO);
         
         model.addAttribute("result", resultVO);
         
-        return "board/viewForm";
+        return "board/view";
     }
 	
 	

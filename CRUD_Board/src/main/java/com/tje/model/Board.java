@@ -11,19 +11,8 @@ public class Board {
 	String b_writer;
 	Date b_date;
 	int b_count;
-	int code;
 	
 	
-	
-	public int getCode() {
-		return code;
-	}
-
-
-
-	public void setCode(int code) {
-		this.code = code;
-	}
 
 
 

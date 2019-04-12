@@ -82,124 +82,70 @@ var idck = 0;
        var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
        // 이메일이 적합한지 검사할 정규식
 		
-        var userid = $("#member_id").val();
-		var userpwd = $("#member_pwd").val();
+        var member_id = $("#member_id").val();
+		var member_pwd = $("#member_pwd").val();
 		var userpwdcheck = $("#userpwdcheck").val();
-		var username = $("#member_name").val();
-		var email = $("#member_email").val();
-		var addr1 = $("#member_postcode").val();
-		var addr2 = $("#member_address").val();
-		var addr3 = $("#member_detail").val();
+		var member_name = $("#member_name").val();
+		var member_email = $("#member_email").val();
+		var member_postcode = $("#member_postcode").val();
+		var member_address = $("#member_address").val();
+		var member_detail = $("#member_detail").val();
 
        var arrNum1 = new Array(); // 주민번호 앞자리숫자 6개를 담을 배열
        var arrNum2 = new Array(); // 주민번호 뒷자리숫자 7개를 담을 배열
 
        // ------------ 이메일 까지 -----------
 
-       if(!check(re,userid,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+       
+       if(member_id.length == 0 || member_id.length == 0) {
+    	   alert("아이디를 입력해주세요.")
+    	   join.member_id.focus();
+    	   return false;
+       }
+       
+       if(!check(re,member_pwd,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
            return false;
        }
-
-       if(!check(re,userpwd,"패스워드는 4~12자의 영문 대소문자와 숫자로만 입력")) {
-           return false;
+       
+       if(join.member_pwd.length == 0) {
+    	   alert("비밀번호를 입력해주세요.")
+    	   join.member_pwd.focus();
+    	   return false;
        }
+       
 
-       if(join.userpwd.value != join.userpwdcheck.value) {
+       if(join.member_pwd.value != join.userpwdcheck.value) {
            alert("비밀번호가 다릅니다. 다시 확인해 주세요.");
            join.userpwdcheck.value = "";
            join.userpwdcheck.focus();
            return false;
        }
 
-       if(email.value=="") {
-           alert("이메일을 입력해 주세요");
-           email.focus();
-           return false;
-       }
-
-       if(!check(re2, email, "적합하지 않은 이메일 형식입니다.")) {
-           return false;
-       }
-
-       if(join.name.value=="") {
+       if(join.member_name.value=="" || join.member_name.length == 0) {
            alert("이름을 입력해 주세요");
-           join.name.focus();
+           join.member_name.focus();
            return false;
        }
        
-   	
-		if(addr1.length == 0 || addr2.length == 0 || addr3.length == 0){
+
+       if(join.member_email.value=="" || join.member_email.length ==0) {
+           alert("이메일을 입력해 주세요");
+           join.member_email.focus();
+           return false;
+       }
+/* 
+       if(!check(re2,member_email, "적합하지 않은 이메일 형식입니다.")) {
+           return false;
+       }
+
+   	 */
+		if(member_postcode.length == 0 || member_address.length == 0 || member_detail.length == 0){
 			alert("주소를 입력해주세요.");
 			$("#member_detail").focus();
 			return false;
 		}
 
-       // -------------- 주민번호 -------------
-/* 
-       for (var i=0; i<num1.value.length; i++) {
-           arrNum1[i] = num1.value.charAt(i);
-       } // 주민번호 앞자리를 배열에 순서대로 담는다.
 
-       for (var i=0; i<num2.value.length; i++) {
-           arrNum2[i] = num2.value.charAt(i);
-       } // 주민번호 뒷자리를 배열에 순서대로 담는다.
-
-       var tempSum=0;
-
-       for (var i=0; i<num1.value.length; i++) {
-           tempSum += arrNum1[i] * (2+i);
-       } // 주민번호 검사방법을 적용하여 앞 번호를 모두 계산하여 더함
-
-       for (var i=0; i<num2.value.length-1; i++) {
-           if(i>=2) {
-               tempSum += arrNum2[i] * i;
-           }
-           else {
-               tempSum += arrNum2[i] * (8+i);
-           }
-       } // 같은방식으로 앞 번호 계산한것의 합에 뒷번호 계산한것을 모두 더함
-
-       if((11-(tempSum%11))%10!=arrNum2[6]) {
-           alert("올바른 주민번호가 아닙니다.");
-           num1.value = "";
-           num2.value = "";
-           num1.focus();
-           return false;
-       }else{
-     	// ------------ 생일 자동 등록 -----------
-           if(arrNum2[0]==1 || arrNum2[0]==2) {
-               var y = parseInt(num1.value.substring(0,2));
-               var m = parseInt(num1.value.substring(2,4));
-               var d = parseInt(num1.value.substring(4,6));
-               join.years.value = 1900 + y;
-               join.month.value = m;
-               join.day.value = d;
-           }
-           else if(arrNum2[0]==3 || arrNum2[0]==4) {
-               var y = parseInt(num1.value.substring(0,2));
-               var m = parseInt(num1.value.substring(2,4));
-               var d = parseInt(num1.value.substring(4,6));
-               join.years.value == 2000 + y;
-               join.month.value = m;
-               join.day.value = d;
-           }
-       }
-
-       // 관심분야, 자기소개 미입력시 하라는 메시지 출력
-       if(join.inter[0].checked==false &&
-           join.inter[1].checked==false &&
-           join.inter[2].checked==false &&
-           join.inter[3].checked==false &&
-           join.inter[4].checked==false) {
-           alert("관심분야를 골라주세요");
-           return false;
-       }
-
-       if(join.self.value=="") {
-           alert("자기소개를 적어주세요");
-           join.self.focus();
-           return false;
-       } */
        if(confirm("회원가입을 하시겠습니까?")){
     	  	if(idck==0){
     	  		alert("아이디 중복체크를 해주세요");
@@ -209,20 +155,15 @@ var idck = 0;
     	   alert("회원가입을 축하합니다");
     	   document.join.submit()
     	  	}
+       }else{
+    	   alert("취소 버튼을 누르셨습니다.")
+    	   return false;
        }
        
       
    }
 
-   function check(re, what, message) {
-       if(re.test(what.value)) {
-           return true;
-       }
-       alert(message);
-       what.value = "";
-       what.focus();
-       return false;
-   }
+   
    
 
    
@@ -235,6 +176,11 @@ var idck = 0;
            
            //userid 를 param.
            var member_id =  $("#member_id").val(); 
+           var re = /^[a-zA-Z0-9]{4,12}$/ // 아이디와 패스워드가 적합한지 검사할 정규식
+           
+        	   if(!check(re,member_id,"아이디는 4~12자의 영문 대소문자와 숫자로만 입력")) {
+                   return false;
+               }
            
            $.ajax({
                async: true,
@@ -266,12 +212,29 @@ var idck = 0;
                },
                error : function(error) {
                    
-                   alert("error : " + error);
+                   alert("아이디를 입력해 주세요. " );
                }
            });
        });
    });
+ 
+   function check(re, what, message) {
+       if(re.test(what.value)) {
+           return true;
+       }
+       alert(message);
+       what.value = "";
+       what.focus();
+       return false;
+   }
     
+</script>
+
+<script type="text/javascript">
+	function goPage(){
+		alert("회원가입을 취소 하셨습니다.");
+		location.href="${pageContext.request.contextPath}";
+	}
 </script>
 
 <meta charset="UTF-8">
@@ -285,7 +248,7 @@ var idck = 0;
 <h1>회원가입</h1>
 
  <%-- <form action="${pageContext.request.contextPath}/member/signup.do" method="post" name="join" onsubmit="return validate();"> --%>
-<form action="${pageContext.request.contextPath}/member/signup" method="post" >
+<form name="join" onsubmit="return validate();" action="${pageContext.request.contextPath}/member/signup" method="post"  >
 	
 	
 	<div class="form-group" id="divInputId">
@@ -333,11 +296,11 @@ var idck = 0;
     <input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="member_address.member_address" id="member_address" type="text" readonly="readonly" />
 </div>
 <div class="form-group">
-    <input class="form-control" placeholder="상세주소" name="member_address.member_detail" id="member_address.member_detail" type="text"  />
+    <input class="form-control" placeholder="상세주소" name="member_address.member_detail" id="member_detail" type="text"  />
 </div>
 	<div class="form-group" style="text-align: center;">
-		<input type="submit" class="btn btn-default" value="회원가입" onclick="validate()">
-		<input type="reset" class="btn btn-default" value="취소">
+		<input type="submit" class="btn btn-default" value="회원가입" >
+		<input type="button" class="btn btn-default" value="취소" onclick="goPage();">
 	</div>
 </form>
 	

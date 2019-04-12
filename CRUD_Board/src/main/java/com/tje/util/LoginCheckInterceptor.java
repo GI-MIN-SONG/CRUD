@@ -14,14 +14,14 @@ public class LoginCheckInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = req.getSession(false);
 		
 		if(session == null) {
-			res.sendRedirect(req.getContextPath()+"/member/login");
+			res.sendRedirect(req.getContextPath()+"/member/loginInterceptor");
 			return false;
 		}
 		
 		Member member = (Member)session.getAttribute("loginmember");
 		
 		if(member == null) {
-			res.sendRedirect(req.getContextPath()+"/member/login");
+			res.sendRedirect(req.getContextPath()+"/member/loginInterceptor");
 			return false;
 		}
 		System.out.println("세션정보 :"+session.getId());

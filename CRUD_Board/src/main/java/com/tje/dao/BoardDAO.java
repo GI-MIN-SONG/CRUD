@@ -72,7 +72,7 @@ public class BoardDAO  {
 	
 
 
-	//페이징 
+	//페이징 처리를 위한 전체 게시글의 갯수 구하기
 	
 	public int countArticles(Criteria criteria) throws Exception {
     return sqlSession.selectOne(namespace + ".countArticles", criteria);

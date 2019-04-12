@@ -16,6 +16,28 @@
 
 
 
+<script type="text/javascript">
+function goPage(){
+	location.href="${pageContext.request.contextPath}/board/write";
+	}
+
+</script>
+
+
+ <script type="text/javascript">
+
+	
+	var result = "${msg}";
+if (result == "regSuccess") {
+    alert("게시글 등록이 완료되었습니다.");
+} else if (result == "modSuccess") {
+    alert("게시글 수정이 완료되었습니다.");
+} else if (result == "delSuccess") {
+    alert("게시글 삭제가 완료되었습니다.");
+}
+</script>
+
+
 <!-- <script type="text/javascript">
 	var result = '${msg}';
 	
@@ -33,45 +55,60 @@
 
 </head>
 <body>
-<jsp:include page="../include/header.jsp"/>
 
 <%-- <%@ include file="../include/menu.jsp" %> --%>
-<h2> 게시글 목록</h2>
+
 <!-- <button type="button" id="btnWrite" class="btn btn-default" >글쓰기</button> -->
-<table class="table table-bordered" style="text-align: center; border: 1px solid #dddddd">
-	<tr>
-		<th style="background-color: #eeeeee; text-align: center;">번호</th>
-		<th style="background-color: #eeeeee; text-align: center;">제목</th>
-		<th style="background-color: #eeeeee; text-align: center;">이름</th>
-		<th style="background-color: #eeeeee; text-align: center;">작성일</th>
-		<th style="background-color: #eeeeee; text-align: center;">조회수</th>
-	</tr>
-		<c:forEach items="${list}" var="board">
-		<tr>
-			<td>${board.b_no}</td>
-			<td><a href="${pageContext.request.contextPath}/board/view?b_no=${board.b_no }">${board.b_title }</a></td>
-			<td>${board.b_writer }</td>
-			<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${board.b_date }"/> </td>
-			<td><span>${board.b_count }</span></td>
-		</tr>
-	</c:forEach>
-</table>
-	
-	<a href="${pageContext.request.contextPath}/board/write" class="btn btn-primary pull-right">글쓰기</a>
-	
-	<div class="box-footer">
+<jsp:include page="../include/header.jsp"/>
+<div class="col-lg-12">
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">게시글 목록</h3>
+        </div>
+        <div class="box-body">
+            <table class="table table-bordered">
+                <tbody>
+                <tr>
+                    <th style="width: 30px">#</th>
+                    <th>제목</th>
+                    <th style="width: 150px">작성자</th>
+                    <th style="width: 250px">작성시간</th>
+                    <th style="width: 60px">조회</th>
+                </tr>
+                <c:forEach items="${list}" var="board">
+                <tr>
+                    <td>${board.b_no}</td>
+                    <td><a href="${pageContext.request.contextPath}/board/view?b_no=${board.b_no}">${board.b_title}</a></td>
+                    <td>${board.b_writer}</td>
+                    <td><fmt:formatDate value="${board.b_date}" pattern="yyyy-MM-dd a HH:mm"/></td>
+                    <td><span class="badge bg-red">${board.b_count}</span></td>
+                </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </div>
+        <div class="box-footer">
+            <div class="pull-right">
+                <button type="button" class="btn btn-success btn-flat" onclick="goPage();">
+                    <i class="fa fa-pencil"></i> 글쓰기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="box-footer">
     <div class="text-center">
         <ul class="pagination">
             <c:if test="${pageMaker.prev}">
-                <li><a href="${path}/board/listPaging?page=${pageMaker.startPage - 1}">이전</a></li>
+                <li><a href="${pageContext.request.contextPath}/board/listPaging?page=${pageMaker.startPage - 1}">이전</a></li>
             </c:if>
             <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
                 <li <c:out value="${pageMaker.criteria.page == idx ? 'class=active' : ''}"/>>
-                    <a href="${path}/board/listPaging?page=${idx}">${idx}</a>
+                    <a href="${pageContext.request.contextPath}/board/listPaging?page=${idx}">${idx}</a>
                 </li>
             </c:forEach>
             <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
-                <li><a href="${path}/board/listPaging?page=${pageMaker.endPage + 1}">다음</a></li>
+                <li><a href="${pageContext.request.contextPath}/board/listPaging?page=${pageMaker.endPage + 1}">다음</a></li>
             </c:if>
         </ul>
     </div>

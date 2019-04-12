@@ -38,13 +38,24 @@ public class MemberController {
 		
 	}
 	
+	// 회원 가입 POST 
+	// 데이터 처리
+	@RequestMapping(value="/signup", method=RequestMethod.POST)
+	public String signupPOST(Member member) {
+		
+		System.out.println("회원가입 요청");
+		
+		service.insert(member);
+		return "main";
+	}
+	/*
 	// 회원 가입 GET
 		@RequestMapping(value="/sign", method=RequestMethod.GET)
 		public String signupGET2() {
 			
 			return "/member/sign";
 		}
-	
+	*/
 	// 로그인 폼 GET 방식
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String loginForm() {
@@ -53,8 +64,7 @@ public class MemberController {
 	
 	// 로그인 처리 POST 방식
 	@RequestMapping(value="/login", method=RequestMethod.POST)
-	public String loginResult(HttpSession session, Member member) {
-		
+	public String loginResult(HttpSession session,Member member) {
 		
 		
 		
@@ -64,13 +74,18 @@ public class MemberController {
 			System.out.println("로그인 실패");
 			return "/member/loginResult";
 		}else {
-			
 			session.setAttribute("loginmember", member);
 			System.out.println("로그인 성공 세션 정보 :" + session.getId());
 			return "/member/loginResult";
 		}
 		
 
+	}
+	
+	// 인터셉터 부분 
+	@RequestMapping(value="/loginInterceptor", method=RequestMethod.GET)
+	public String loginInterceptor() {
+		return "/member/loginInterceptor";
 	}
 	
 	// 로그아웃
@@ -114,53 +129,7 @@ public class MemberController {
 		
 	}
 	
-	// 회원 가입 POST
 	
-	// 파라메터에서 유효성 검사가 필요한 객체에 대해 @Valid 어노테이션을 추가
-	// BindingResult 객체는 검증 결과에 대한 결과 정보들을 담고 있다.
-	
-	// 검증 결과 정보, 즉 BindingResult는 DispatcherServlet이 JSP에 넣어줍니다.
-	// 즉 컨트롤러에서 뷰 이름을 반환하면 에러 내용을 바인딩해서 JSP에 넘겨줄 테니,
-	// 값을 사용자에게 보여주라는 의미의 forwarding 개념이 깔려있습니다.
-	
-	// 파라미터에서 @Valid 어노테이션을 붙이는 유효성 검사에 대한 선언은 컨트롤러에서 하고,
-	// 유효성 검사를 체크하는 그 근거는 UserVO 클래스에 작성합니다.
-	
-//	
-//	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
-//	public String signupPOST(@ModelAttribute @Valid Member member,BindingResult result) {
-//		//에러가 있는지 검사
-//		if(result.hasErrors()) {
-//			// 에러를 List로 저장한다
-//			List<ObjectError> list = result.getAllErrors();
-//			for( ObjectError error : list) {
-//				System.out.println(error);
-//			}
-//			return "/member/signUp";
-//		}
-//		service.insert(member);
-//		return "main";
-//	}
-//	
-	
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
-	public String signupPOST(Member member) {
-		
-		System.out.println("회원가입 요청");
-		
-		service.insert(member);
-		return "main";
-	}
-//	
-//	@RequestMapping(value="/signup.do", method=RequestMethod.POST)
-//	public String signupPOST(Member member){
-//		
-//		System.out.println("회원가입 요청");
-//		
-//		service.insert(member);
-//		return "main";
-//	}
-//	
 	
 
 }

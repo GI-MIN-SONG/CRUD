@@ -55,12 +55,12 @@ function loginBtn(){
           
                 <h3 style="text-align: center;">로그인</h3>
                 <div class="form-group">
-                    <input type="text" class="form-control" placeholder="아이디" 
-                           name="member_id" maxlength="20" id="member_id">
+                    <input type="text" id="member_id" name="member_id" class="form-control" placeholder="아이디" 
+                            maxlength="20">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" placeholder="비밀번호" 
-                           name="member_pwd" maxlength="20" id="member_pwd">
+                    <input type="password" name="member_pwd" id="member_pwd" class="form-control" placeholder="비밀번호" 
+                            maxlength="20" >
                 </div>
                 <input type="button" class="btn btn-primary form-control" value="로그인" onclick="loginBtn()">
             </form>

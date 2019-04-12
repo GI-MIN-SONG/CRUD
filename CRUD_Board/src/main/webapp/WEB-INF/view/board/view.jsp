@@ -49,34 +49,26 @@
 </script>
 
 <script>
-//목록
-function fn_cancel(){
-    
-    var form = document.getElementById("viewForm");
-    
-    form.action = "<c:url value='/board/list'/>";
-    form.submit();
-    
-}
+
  
 //수정
 function fn_update(){
     
-    var form = document.getElementById("viewForm");
-    
-    form.action = "<c:url value='/board/update'/>";
-    form.submit();
+	location.href="${pageContext.request.contextPath}/board/list";
 }
  
 //답변
 function fn_relay(){
     
-    var form = document.getElementById("viewForm");
-    
-    form.action = "<c:url value='/board/relayForm.do'/>";
-    form.submit();
+	location.href="${pageContext.request.contextPath}/board/list";
     
 }
+// 목록
+function fn_cancel(){
+	location.href="${pageContext.request.contextPath}/board/list";
+	}
+
+
 </script>
 </head>
 <body>
@@ -86,29 +78,36 @@ function fn_relay(){
     <form id="viewForm" name="viewForm" method="post">
         <div>
             <h2>글쓰기</h2>
-            <div>
+            <div class="">
                 <table>
                     <tr>
                         <th>제목</th>
-                        <td><input style="width: 500px" type="text" id="title" name="title" value="${result.title }"/></td>
+                        <td><input style="width: 500px" type="text" id="title" name="title" value="${result.b_title }"/></td>
                     </tr>
                     <tr>
                         <th>내용</th>
-                        <td><textarea style="width: 500px" rows="10" cols="10" id="content" name="content"><c:out value="${result.content }"/></textarea></td>
+                        <td><textarea style="width: 500px" rows="10" cols="10" id="content" name="content"><c:out value="${result.b_content }"/></textarea></td>
                     </tr>
                     <tr>
                         <th>작성자</th>
-                        <td><input style="width: 500px" type="text" id="writer" name="writer" value="${result.writer }"/></td>
+                        <td><input style="width: 500px" type="text" id="writer" name="writer" value="${result.b_writer }"/></td>
                     </tr>
                 </table>
-                <div>
-                    <a href='#' onClick='fn_update()'>수정</a>
-                    <a href='#' onClick='fn_cancel()'>목록</a>
-                    <a href='#' onClick='fn_relay()'>답변</a>                    
+                <div class="form-group">
+                    <button type="button" class="btn btn-success btn-flat" onclick="fn_update();">
+                    <i class="fa fa-pencil"></i> 수정
+                </button>
+                    <button type="button" class="btn btn-success btn-flat" onclick="fn_cancel();">
+                    <i class="fa fa-pencil"></i> 목록
+                </button>
+                    <button type="button" class="btn btn-success btn-flat" onclick="fn_relay();">
+                    <i class="fa fa-pencil"></i> 답변
+                </button>
+                              
                 </div>
             </div>
         </div>
-        <input type='hidden' id='code' name='code' value='${result.code }' />
+        <input type='hidden' id='code' name='code' value='${result.b_no }' />
     </form>
 </div>
 

@@ -82,7 +82,7 @@
 	<!-- 조인을 통해 주소값 추출  -->
 	<select id="login" parameterType="member" resultMap="Member">
 		select * from
-		member inner join member_address
+		Member inner join member_address
 		on member.member_address_id = member_address.member_address_id
 		where member_id = #{member_id} and member_pwd = #{member_pwd}
 	</select> 
