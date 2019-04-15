@@ -13,9 +13,10 @@
 <script type = "text.javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script> 
 <script type = "text.javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"> </script>
 
-
-
-
+<!-- footer 스타일 적용  -->
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet">
 <script type="text/javascript">
 function goPage(){
 	location.href="${pageContext.request.contextPath}/board/write";
@@ -80,7 +81,7 @@ if (result == "regSuccess") {
                     <td>${board.b_no}</td>
                     <td><a href="${pageContext.request.contextPath}/board/view?b_no=${board.b_no}">${board.b_title}</a></td>
                     <td>${board.b_writer}</td>
-                    <td><fmt:formatDate value="${board.b_date}" pattern="yyyy-MM-dd a HH:mm"/></td>
+                    <td><fmt:formatDate value="${board.b_date}" pattern="yyyy-MM-dd a HH:mm:ss"/></td>
                     <td><span class="badge bg-red">${board.b_count}</span></td>
                 </tr>
                 </c:forEach>
@@ -114,6 +115,6 @@ if (result == "regSuccess") {
     </div>
 </div>
 
-
+<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

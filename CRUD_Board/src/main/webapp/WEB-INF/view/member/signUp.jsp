@@ -20,7 +20,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-                                                                                                                                                                                                                                                                                                                                                                                            
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet">
 <!--autoload=false 파라미터를 이용하여 자동으로 로딩되는 것을 막습니다.-->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <script>
@@ -307,6 +309,6 @@ var idck = 0;
 </div>
 </div>
 
-
+<jsp:include page="../include/footer.jsp"/>
 </body>
 </html>

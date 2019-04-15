@@ -28,7 +28,7 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/">회원제 웹사이트</a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/">SGM.COM</a>
 		</div>
 		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">

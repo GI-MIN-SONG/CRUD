@@ -1,7 +1,6 @@
 package com.tje.model;
 
-import java.util.Date;
-
+import java.sql.Timestamp;
 
 public class Board {
 	
@@ -9,7 +8,7 @@ public class Board {
 	String b_title;
 	String b_content;
 	String b_writer;
-	Date b_date;
+	Timestamp b_date;
 	int b_count;
 	
 	
@@ -59,13 +58,13 @@ public class Board {
 
 
 
-	public Date getB_date() {
+	public Timestamp getB_date() {
 		return b_date;
 	}
 
 
 
-	public void setB_date(Date b_date) {
+	public void setB_date(Timestamp b_date) {
 		this.b_date = b_date;
 	}
 

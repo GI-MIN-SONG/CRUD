@@ -11,8 +11,8 @@
 <link rel="stylesheet" type = "text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.css">
 <script type = "text.javascript" src="${pageContext.request.contextPath}/resources/js/jquery-3.3.1.min.js"></script> 
 <script type = "text.javascript" src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"> </script>
-
-
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
 <!-- html 메인화면 적용시킨 것  -->
 <%-- 부트스트랩 이용하기 --%>
 <link href='http://fonts.googleapis.com/earlyaccess/nanumgothic.css'
@@ -69,7 +69,7 @@ function loginBtn(){
     <div class="col-lg-4"></div>
     </div>
 	
-	
+<jsp:include page="../include/footer.jsp"/>	
 
 	
 </body>

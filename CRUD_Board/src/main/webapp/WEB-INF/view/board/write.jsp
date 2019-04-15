@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 <title>게시글 작성</title>
-
+<link href="${pageContext.request.contextPath}/resources/css/style.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/font-awesome.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet">
 
 <script type="text/javascript">
 function goPage(){
@@ -77,9 +79,8 @@ function goPage(){
           <input type="hidden" id="b_writer" name="b_writer" value="${loginmember.member_name}">
     </form>
 </div>
-	
-	
-	
 
+
+<jsp:include page="../include/footer.jsp"/>	
 </body>
 </html>

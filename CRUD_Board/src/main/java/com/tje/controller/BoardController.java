@@ -122,19 +122,19 @@ public class BoardController {
 			return model;
 			
 		}
-	/*
+	
 	//상세 게시글 ,조회수 증가 처리
 	@RequestMapping(value="view",method=RequestMethod.GET)
 	public ModelAndView view(@RequestParam int b_no, HttpSession session)throws Exception{
 		service.increaseViewcnt(b_no, session);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/view");
+		mav.setViewName("board/read");
 		mav.addObject("board", service.read(b_no));
 		
 		System.out.println("상세 게시글 가저오기 ");
 		
 		return mav;
-	}*/
+	}
 	
 	
 	@RequestMapping(value="/view")
